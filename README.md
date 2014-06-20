@@ -20,3 +20,9 @@ Java Cheat Sheet
 
 - src/GenericTest
  - example of generic functions and generic class (with filter by interface)
+
+- src/ClassTest/
+ - OOP examples (abstract class, inheritance, interfaces, polymorphism)
+
+- src/ConcurrentTest/
+ - multithreading examples
