@@ -15,4 +15,8 @@ public interface MyInterface {
         System.out.println(MyInterface.class.getName());
     }
     abstract void bar();
+    
+    static Integer getOneInt() {
+        return 1;
+    }
 }
