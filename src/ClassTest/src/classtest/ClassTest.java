@@ -42,6 +42,17 @@ public class ClassTest {
         AClass aa = b;
         // And call function by interface
         example(b);
+        // Object from anonymous MyInterface
+        MyInterface wI = new MyInterface() {
+            
+            // foo() declarated in MyInterface
+            
+            @Override
+            public void bar() {
+                System.out.println("bar() from anonymous MyInterface");
+            }
+        };
+        wI.bar();
     }
     
 }
