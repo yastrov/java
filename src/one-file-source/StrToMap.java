@@ -109,6 +109,9 @@ public class StrToMap {
             map.keySet().stream().forEach((key) -> {
                     System.out.println("Key = " + key);
                 });
+            // Or
+            map.forEach((id, val) -> System.out.println(val));
+            
             String key, val;
             for (Iterator<String> it = map.keySet().iterator(); it.hasNext(); ){
                 key = it.next();
