@@ -8,8 +8,8 @@ Examples and some information for work with simple Threads on Java.
     nThreads = Runtime.getRuntime().availableProcessors();
 
 Интерфейсы:  
-Runnable - для выполнения действия в другом потоке без возврата результата  
-Callable<T> - для выполнения действия в другом потоке с возвратом результата  
+Runnable - для выполнения действия в другом потоке без возврата результата (метод run)  
+Callable<T> - для выполнения действия в другом потоке с возвратом результата (метод T call)  
 
 
 ForkJoin - лучший выбор для алгоритмов "разделяй и влавствуй" и MapReduce (Java 7+ может содержать баги) (пример с вызовом в исходном коде)
@@ -47,6 +47,36 @@ Examples:
             lock.unlock();
         }
     }
+
+## Структуры данных
+
+    import java.util.concurrent.ConcurrentLinkedDeque;
+
+    // In our main class
+    private static ConcurrentLinkedDeque<Item> deque = new ConcurrentLinkedDeque<>();
+
+    // In on threads (subclass of our main):
+    deque.add(new Item(...));
+
+    // In other threads (subclass of our main, nonblocking):
+    Item item;
+    while( (item = deque.pollFirst()) != null ) {
+        // work with item
+    }
+
+    // Or im main:
+    Item[] items = deque.toArray(new Item[0]);
+
+Или вариант
+    import java.util.concurrent.LinkedTransferQueue;
+    private static LinkedTransferQueue<Item> linkTransQ = new LinkedTransferQueue<>();
+
+    //In on threads:
+    linkTransQ.offer(new Item(...));
+
+    //In other threads
+    Item item = linkTransQ.take();
+
 
 ## Links:
 
