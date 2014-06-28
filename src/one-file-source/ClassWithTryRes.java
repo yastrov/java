@@ -7,7 +7,8 @@ public class ClassWithTryRes extends SuperClass implements AutoCloseable {
     private Integer value = 0;
 
     public ClassTemplate () {
-        super();
+        //super(); // It must be in here, but we have other idea:
+        this(6); // Call other constructor
     }
     
     public ClassTemplate (Integer value) {
