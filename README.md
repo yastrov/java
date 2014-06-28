@@ -9,6 +9,10 @@ Java Cheat Sheet
   - simple templates of core of Java
   - simple exercises
 
+  - EncodingTest.java
+    - work with encodings
+    - work with files
+
 -  src/WalkTest
  - example of walk over file tree
  - tips for call functions of main class (via create instance of main project class)
