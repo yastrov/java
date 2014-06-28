@@ -12,8 +12,12 @@ package classtest;
  */
 public class AClass extends AbstractClass implements MyInterface{
     private Integer a = 0;
+
+    public AClass() {
+        this(0);
+    }
     
-    AClass(Integer a) {
+    public AClass(Integer a) {
         this.a = a;
     }
 

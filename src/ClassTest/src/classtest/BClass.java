@@ -13,8 +13,13 @@ package classtest;
 public class BClass extends AClass implements MyGenericInterface<Integer> {
     private final String selfName = "My String";
     private Integer value = 0;
+
+    public BClass() {
+        // Call other constructor
+        this(6);
+    }
     
-    BClass(Integer b) {
+    public BClass(Integer b) {
         // Call constructor for Basic class
         super(b);
         System.out.println(BClass.class.getName());
@@ -39,4 +44,13 @@ public class BClass extends AClass implements MyGenericInterface<Integer> {
     public void setValue(Integer value) {
         this.value = value;
     }
+
+    /* Called by the garbage collector, may make perfomance problem.
+    Use only if you work with System Resources and you know, what you do.
+    Empty finalize() do no effect:). It just for simple.
+    */
+    protected void finalize () throws Throwable {
+        ;
+    }
+
 }
