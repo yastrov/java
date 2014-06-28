@@ -54,10 +54,64 @@ public class EncodingTest {
         }
     }
     
+
+    /**
+     * Java 7 style for open file.
+     * Read and print File to console.
+     * @param filename - String with name of file.
+     * @param charsetStr - name of charset encoding as String.
+     * @throws IOException 
+     */
+    public static void printFileViaBuffered (String filename, String charsetStr)
+            throws IOException {
+        Path path = Paths.get(filename);
+        Charset charset = Charset.forName(charsetStr);
+        String line = null;
+        try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+    }
+    
+    public static void copyFileViaBuffered (String filename, String newFilename,
+            String charsetStr) throws IOException {
+        Path file = Paths.get(filename);
+        Path newFile = Paths.get(newFilename);
+        Charset charset = Charset.forName(charsetStr);
+        int data = 0;
+        try (BufferedReader reader = Files.newBufferedReader(file, charset);
+             BufferedWriter writer = Files.newBufferedWriter(newFile, charset,
+                      StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            while ((data = reader.read()) != -1) {
+                writer.write(data);
+            }
+        }
+    }
+    
+    public static void copyFilevViaStream (String filename, String newFilename)
+            throws IOException {
+        Path file = Paths.get(filename);
+        Path newFile = Paths.get(newFilename);
+        int data = 0;
+        try (InputStream in = Files.newInputStream(file);
+             OutputStream out = Files.newOutputStream(newFile, 
+                      StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            while ((data = in.read()) != -1) {
+                out.write(data);
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         toBytesFromBytes();
+        try {
+            printFileViaBuffered("~/.bash_history", "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();;
+        }
     }
 }
