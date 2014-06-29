@@ -15,3 +15,18 @@ default - реализация функции по умолчанию в инт�
 
 implements - указывается при объявлении класса, если он реализует интерфейс  
 extends - указывается при объявлении класса, если он расширяет (наследует) другой класс   
+
+## Rules
+
+- Methods that are not final, private or static can be overriden.
+- Protected methods can override methods that do not have access modifiers.
+- The overriding methods cannot have a more restrictive access modifier (package, public, private, protected) that the original method.
+- The overriding method cannot throw any new checked exceptions.
+
+## Hints:
+- constructor may not have access modifiers.
+
+- A class can have any number of static initializer blocks. Static initializer blocks are executed only once per class initialization.
+    static {
+        //do something;
+    }

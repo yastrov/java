@@ -10,6 +10,7 @@ package classtest;
  *
  * @author Yuri Astrov
  */
-abstract class AbstractClass {
-    abstract void zoo();
+public abstract class AbstractClass {
+    public void reset() { ; }
+    public abstract void zoo();
 }
