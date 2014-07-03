@@ -97,6 +97,11 @@ public class EncodingTest {
         }
     }
     
+    /**
+    * java.nio.file.Files.copy analog.
+    * @param filename
+    * @param newFilename
+    */
     public static void copyFilevViaStream (String filename, String newFilename)
             throws IOException {
         Path file = Paths.get(filename);
@@ -105,8 +110,9 @@ public class EncodingTest {
         try (InputStream in = Files.newInputStream(file);
              OutputStream out = Files.newOutputStream(newFile, 
                       StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-            while ((data = in.read()) != -1) {
-                out.write(data);
+            byte[] buffer = new byte[2*1024];
+            while ((data = in.read(buffer)) != -1) {
+                out.write(buffer, 0, data);
             }
         }
     }
@@ -116,8 +122,10 @@ public class EncodingTest {
      */
     public static void main(String[] args) {
         toBytesFromBytes();
+        String home = System.getProperty("user.home");
         try {
-            printFileViaBuffered("~/.bash_history", "UTF-8");
+            printFileViaBuffered(home+"/.bash_history", "UTF-8");
+            copyFilevViaStream(home+"/.bash_history", home+"/.bash_history123");
         } catch (IOException ex) {
             ex.printStackTrace();;
         }
