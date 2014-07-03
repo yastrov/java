@@ -8,6 +8,8 @@ package walktest;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +25,24 @@ import java.util.logging.Logger;
 public class WalkTest implements WalkDirInterface {
     private static final Logger logger = Logger.getLogger(WalkTest.class.getName());
     private static final String logFileName = "logger.log";
+    
+    /**
+     * Print files in dir via DirectoryStream class.
+     * @param dir 
+     */
+    public static void printViaDirectorySteram (Path dir) {
+        /*
+        AT! If you return ArrayList or others - you can overflow memory!
+        Also you can create filter
+       DirectoryStream.Filter<Path> filter = newDirectoryStream.Filter<Path>()*/
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{c,h,cpp,hpp,java}")) {
+            for (Path entry: stream) {
+                System.out.println(entry.getFileName());
+            }
+        } catch (IOException | DirectoryIteratorException ex) {
+           ex.printStackTrace();
+        }
+    }
     
     /**
      * @param args the command line arguments
