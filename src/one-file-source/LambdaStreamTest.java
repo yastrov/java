@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 /*
@@ -93,5 +94,6 @@ public class LambdaStreamTest {
         
         Function<String, Integer> toInteger = Integer::valueOf;
         Function<String, String> backToString = toInteger.andThen(String::valueOf);
+        Comparator<Integer> intCmp = (Integer i1, Integer i2) -> (int) (i2.intValue() - i1.intValue());
     }
 }
