@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Example for work with Encoding.
@@ -117,6 +118,16 @@ public class EncodingTest {
         }
     }
 
+
+    public static void readByLines(String filename)  throws IOException {         
+        try( Stream<String> lines = Files.lines( filename, StandardCharsets.UTF_8 ) )
+        {
+            for( String line : (Iterable<String>) lines::iterator )
+            {
+                ;
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
